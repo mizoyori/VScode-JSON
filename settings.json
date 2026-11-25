@@ -1,40 +1,41 @@
-// 1. マルチルートワークスペースで「案件単位」にまとめる
-
 {
-  "folders": [
-    { "path": "../frontend", "name": "frontend" },
-    { "path": "../api",      "name": "api" },
-    { "path": "../infra",    "name": "infra" }
-  ],
-  "settings": {
-    // このワークスペースだけに効く設定
-    "window.title": "【A案件】${activeEditorShort} - ${rootName}",
-    "search.exclude": { "**/node_modules": true, "**/dist": true }
-  },
-  "extensions": {
-    "recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
-  }
-}
+  // =========================================================
+  // 1. マルチルートワークスペース（.code-workspace ファイルに書く）
+  //    ↓ このブロックは settings.json ではなく *.code-workspace に記述
+  // =========================================================
+  // {
+  //   "folders": [
+  //     { "path": "../frontend", "name": "frontend" },
+  //     { "path": "../api",      "name": "api" },
+  //     { "path": "../infra",    "name": "infra" }
+  //   ],
+  //   "settings": {
+  //     "window.title": "【A案件】${activeEditorShort} - ${rootName}",
+  //     "search.exclude": { "**/node_modules": true, "**/dist": true }
+  //   },
+  //   "extensions": {
+  //     "recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
+  //   }
+  // }
 
+  // =========================================================
+  // 2. ウィンドウを見分ける（誤操作防止の最重要設定）
+  // =========================================================
 
-// 2. ウィンドウを見分ける（誤操作防止の最重要設定）
-
-{
   // タイトルバーにリポジトリ名とブランチ名を出す
   "window.title": "${rootName} [${activeRepositoryBranchName}] - ${activeEditorShort}",
- 
+
   // 案件ごとに色を変える（各プロジェクトの .vscode/settings.json に書く）
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#073170",
     "titleBar.activeForeground": "#ffffff",
     "activityBar.background": "#073170"
-  }
-}
+  },
 
+  // =========================================================
+  // 3. 新規ウィンドウで開く / 誤って上書きしないための設定
+  // =========================================================
 
-// 3. 新規ウィンドウで開く / 誤って上書きしないための設定
-
-{
   // フォルダを開く時は必ず新しいウィンドウ
   "window.openFoldersInNewWindow": "on",
   // 再起動時に前回のウィンドウをすべて復元
@@ -42,13 +43,12 @@
   // プレビュータブ（斜体タブ）を無効化。開いたファイルが勝手に置き換わらない
   "workbench.editor.enablePreview": false,
   // ピン留めしたタブをコンパクト表示にする
-  "workbench.editor.pinnedTabSizing": "compact"
-}
+  "workbench.editor.pinnedTabSizing": "compact",
 
+  // =========================================================
+  // 4. Git 事故を防ぐ
+  // =========================================================
 
-// 4. Git 事故を防ぐ
-
-{
   "git.autofetch": true,
   "git.branchProtection": ["main", "develop"],
   "git.branchProtectionPrompt": "alwaysPrompt",
